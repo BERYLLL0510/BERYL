@@ -1,0 +1,38 @@
+/* 基本排版 */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin-top: 50px;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 20px;
+}
+
+/* 讓包住圖片的 a 標籤變成區塊，並加上過渡效果 */
+.gallery a {
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 圖片樣式設定 */
+.gallery img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+/* 滑鼠移到 a 標籤（整張圖片區域）時，整體放大並加上陰影 */
+.gallery a:hover {
+    transform: scale(1.1); /* 放大 10% */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
