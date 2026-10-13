@@ -1,0 +1,553 @@
+
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 18 官方旗艦預購</title>
+    <!-- 引入 Google Fonts 與 FontAwesome 圖標 -->
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #000000;
+            --card-bg: #161617;
+            --text-main: #f5f5f7;
+            --text-muted: #86868b;
+            --accent: #2997ff;
+            --accent-hover: #0077ed;
+            --border-color: #333336;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'SF Pro Display', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* 導覽列 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-icon-container {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            transition: color 0.3s;
+        }
+
+        .cart-icon-container:hover {
+            color: var(--accent);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* 主商品區 */
+        .main-container {
+            max-width: 1200px;
+            margin: 100px auto 60px;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                margin-top: 80px;
+            }
+        }
+
+        /* 商品圖片展示 */
+        .product-gallery {
+            position: relative;
+            text-align: center;
+            background: radial-gradient(circle, #222 0%, #0d0d0d 70%);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            transition: transform 0.5s ease;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* 商品資訊與規格 */
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .badge-new {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff3b30, #ff9500);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            width: fit-content;
+            letter-spacing: 1px;
+        }
+
+        .product-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+        }
+
+        .product-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        /* 選項群組 */
+        .options-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-main);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--text-muted);
+        }
+
+        .option-btn.active {
+            border-color: var(--accent);
+            background: rgba(41, 151, 255, 0.08);
+        }
+
+        .option-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .option-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* 顏色選擇 */
+        .color-selector {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .color-dot.active {
+            border-color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* 購買按鈕 */
+        .buy-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 10px 20px rgba(41, 151, 255, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .buy-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .buy-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 滿版特效 Canvas */
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* 底部提示 */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 滿版煙火特效 Canvas -->
+    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- 頂部導覽列 -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-brands fa-apple"></i> iPhone 18 Pro
+            </div>
+            <div class="cart-icon-container" title="查看購物車">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-badge" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="main-container">
+        <!-- 左側圖片 -->
+        <div class="product-gallery">
+            <!-- 示意圖：使用高質感科技感手機向量/圖片 -->
+            <img id="product-img" src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop" alt="iPhone 18 Pro" class="product-image">
+        </div>
+
+        <!-- 右側規格選擇 -->
+        <div class="product-details">
+            <div>
+                <span class="badge-new">全新亮相</span>
+                <h1 class="product-title">iPhone 18 Pro</h1>
+                <p class="product-subtitle">全景極光螢幕、超強仿生晶片，定義未來智慧科技。</p>
+            </div>
+
+            <div class="product-price" id="display-price">NT$ 36,900起</div>
+
+            <!-- 外觀顏色選擇 -->
+            <div>
+                <div class="section-title">外觀顏色</div>
+                <div class="color-selector">
+                    <div class="color-dot active" style="background-color: #555759;" onclick="changeColor('钛金灰', '#555759', 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop')" title="钛金灰"></div>
+                    <div class="color-dot" style="background-color: #e3dec3;" onclick="changeColor('星光金', '#e3dec3', 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=800&auto=format&fit=crop')" title="星光金"></div>
+                    <div class="color-dot" style="background-color: #2b3847;" onclick="changeColor('深海藍', '#2b3847', 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?q=80&w=800&auto=format&fit=crop')" title="深海藍"></div>
+                    <div class="color-dot" style="background-color: #1a1a1a;" onclick="changeColor('太空黑', '#1a1a1a', 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop')" title="太空黑"></div>
+                </div>
+            </div>
+
+            <!-- 儲存容量選擇 -->
+            <div>
+                <div class="section-title">儲存容量</div>
+                <div class="options-group">
+                    <button class="option-btn active" onclick="selectStorage(this, 36900, '256GB')">
+                        <div class="option-title">256GB</div>
+                        <div class="option-desc">NT$ 36,900</div>
+                    </button>
+                    <button class="option-btn" onclick="selectStorage(this, 42900, '512GB')">
+                        <div class="option-title">512GB</div>
+                        <div class="option-desc">NT$ 42,900</div>
+                    </button>
+                    <button class="option-btn" onclick="selectStorage(this, 48900, '1TB')">
+                        <div class="option-title">1TB</div>
+                        <div class="option-desc">NT$ 48,900</div>
+                    </button>
+                    <button class="option-btn" onclick="selectStorage(this, 56900, '2TB')">
+                        <div class="option-title">2TB</div>
+                        <div class="option-desc">NT$ 56,900</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 加入購物車按鈕 -->
+            <button class="buy-btn" onclick="addToCart()">
+                <i class="fa-solid fa-cart-plus"></i> 加入購物車
+            </button>
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        <p>&copy; 2026 Apple Inc. 保留一切權利。本網頁為展示用途。</p>
+    </footer>
+
+    <!-- JavaScript 互動與特效邏輯 -->
+    <script>
+        // 當前選擇的商品狀態
+        let selectedConfig = {
+            name: "iPhone 18 Pro",
+            color: "钛金灰",
+            storage: "256GB",
+            price: 36900
+        };
+
+        let cartCount = 0;
+
+        // 切換顏色
+        function changeColor(colorName, hex, imgUrl) {
+            selectedConfig.color = colorName;
+            document.getElementById('product-img').src = imgUrl;
+            
+            // 更新顏色點選樣式
+            const dots = document.querySelectorAll('.color-dot');
+            dots.forEach(dot => dot.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // 選擇容量
+        function selectStorage(btnElement, price, storageSize) {
+            selectedConfig.storage = storageSize;
+            selectedConfig.price = price;
+            
+            document.getElementById('display-price').innerText = `NT$ ${price.toLocaleString()}起`;
+
+            // 更新按鈕樣式
+            const buttons = document.querySelectorAll('.options-group .option-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+
+        // 加入購物車並觸發煙火/開花特效
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            
+            // 觸發滿版煙火特效
+            triggerFireworks();
+        }
+
+        /* ------------------ 絢麗滿版煙火/開花特效引擎 ------------------ */
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let particles = [];
+        let fireworks = [];
+        let animationId = null;
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                // 隨機角度與速度，模擬「開花」擴散效果
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 8 + 2;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.010; // 漸隱速度
+                this.size = Math.random() * 3 + 2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.08; // 重力效果
+                this.vx *= 0.96; // 空气阻力
+                this.vy *= 0.96;
+                this.alpha -= this.decay;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(this.alpha, 0);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        class Firework {
+            constructor(startX, startY, targetX, targetY) {
+                this.x = startX;
+                this.y = startY;
+                this.targetX = targetX;
+                this.targetY = targetY;
+                const angle = Math.atan2(targetY - startY, targetX - startX);
+                const speed = 12;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.exploded = false;
+                this.color = `hsl(${Math.random() * 360}, 100%, 65%)`;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                // 當接近目標高度時引爆
+                if (Math.abs(this.targetY - this.y) < 20) {
+                    this.explode();
+                    this.exploded = true;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            explode() {
+                // 產生大量粒子，呈現盛大開花特效
+                const particleCount = 100;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle(this.targetX, this.targetY, this.color));
+                }
+            }
+        }
+
+        function triggerFireworks() {
+            // 同時從畫面底部發射多發煙火
+            const launchCount = 5;
+            for (let i = 0; i < launchCount; i++) {
+                const startX = (window.innerWidth / (launchCount + 1)) * (i + 1) + (Math.random() * 100 - 50);
+                const startY = window.innerHeight;
+                const targetX = startX + (Math.random() * 200 - 100);
+                const targetY = Math.random() * (window.innerHeight * 0.5) + 80; // 畫面中上方綻放
+                
+                fireworks.push(new Firework(startX, startY, targetX, targetY));
+            }
+
+            if (!animationId) {
+                animateFireworks();
+            }
+        }
+
+        function animateFireworks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 更新與繪製上升中的煙火
+            for (let i = fireworks.length - 1; i >= 0; i--) {
+                fireworks[i].update();
+                fireworks[i].draw();
+                if (fireworks[i].exploded) {
+                    fireworks.splice(i, 1);
+                }
+            }
+
+            // 更新與繪製爆炸後的粒子
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            if (fireworks.length > 0 || particles.length > 0) {
+                animationId = requestAnimationFrame(animateFireworks);
+            } else {
+                animationId = null;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+    </script>
+</body>
+</html>
